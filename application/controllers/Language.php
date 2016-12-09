@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Class Disclaimer
+ * Class Language
  */
-class Disclaimer extends CI_Controller
+class Language extends CI_Controller
 {
     /**
-     * Authencated user array.
+     * Authencated user session array.
      *
      * @access public
      * @var    array
@@ -22,15 +22,13 @@ class Disclaimer extends CI_Controller
     public $Language = [];
 
     /**
-     * Disclaimer constrcutor
-     *
-     * @return void
+     * Language constructor.
      */
     public function __construct()
     {
         parent::__construct();
+        $this->load->library(['session']);
         $this->load->helper(['url', 'language']);
-        $this->load->library(['blade', 'session']);
 
         $this->User     = $this->session->userdata('logged_in');
         $this->Language = $this->session->userdata('language');
@@ -39,15 +37,22 @@ class Disclaimer extends CI_Controller
     }
 
     /**
-     * Show the diclaimer for this petition.
+     * Set the language key.
      *
-     * @see    GET|HEAD: http://www.domain.org/disclaimer
-     * @return blade view.
+     * @see    http://www.domain.tld/language
+     * @return response.
      */
-    public function index()
+    public function set()
     {
-        $data['title'] = 'Disclaimer';
+        $this->lang->load(['keys'], $this->uri->segment(3));
 
-        $this->blade->render('disclaimer', $data);
+        $session = [];
+        $session['language_key']  = $this->uri->segment(3);
+        $session['language_name'] = lang($session['language_key']);
+
+        $this->session->unset_userdata('language');
+        $this->session->set_userdata('language', $session);
+
+        return redirect('/');
     }
 }

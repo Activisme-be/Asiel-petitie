@@ -28,11 +28,13 @@ class Signature extends CI_Controller
     {
         parent::__construct();
         $this->load->library(['session', 'blade', 'form_validation', 'email']);
-        $this->load->helper(['url']);
+        $this->load->helper(['url', 'language']);
         $this->config->load('platform');
 
         $this->User     = $this->session->userdata('logged_in');
-        $this->Language = $this->session->userdata('language'); 
+        $this->Language = $this->session->userdata('language');
+
+        $this->lang->load(['footer', 'navbar', 'petitie', 'counter', 'keys'], $this->Language['language_key']);
     }
 
     /**
@@ -43,9 +45,9 @@ class Signature extends CI_Controller
      */
     public function insert()
     {
-        $this->form_validation->set_rules('name', 'Naam', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim/required');
-        $this->form_validation->set_rules('city', 'Stad', 'trim|required');
+        $this->form_validation->set_rules('name', 'name', 'trim|required');
+        $this->form_validation->set_rules('email', 'name', 'trim|required');
+        $this->form_validation->set_rules('city', 'city', 'trim|required');
 
         if ($this->form_validation->run() == true) { // Form validation passes.
             $input['naam']   = $this->input->post('name');
@@ -58,7 +60,7 @@ class Signature extends CI_Controller
                 // printf(Signatures::find($insert->id));  // For debugging propose.
                 // die();                                  // For debugging propose.
 
-                $this->session->set_flashdata('database', lang('database-email'));
+                $this->session->set_flashdata('database', 'De data is opgeslagen');
 
                 // Email init
                 // $config['smtp_host'] = "send.one.com";
@@ -70,11 +72,11 @@ class Signature extends CI_Controller
                 // Only activate the init when needed.
 
                 //start building email.
-                $this->email->from($input['email'], $input['name']);
+                $this->email->from($input['email'], $input['naam']);
                 $this->email->to($this->config->item('email_deliver'));
                 $this->email->subject($this->config->item('email_header'));
                 $this->email->message($this->blade->render('email/francken', $input));
-                $this->email->set_type('email');
+                $this->email->set_mailtype('html');
 
                 // NOTE: @ is needed before $this->email->send()
                 //       for supressng the error on the server for one.com
@@ -82,13 +84,13 @@ class Signature extends CI_Controller
                     // printf('Email is sent'); // For debugging propose.
                     // die();                   // For debugging propose.
 
-                    $this->session->set_flashdata('email', lang('email-sent-flash'));
+                    $this->session->set_flashdata('email', 'De amail is verzonden.');
                 } else { // The email isn't send.
                     // printf('Email doesnt send.');   // For debuging propose.
                     // die();                          // For debugging propose.
 
                     log_message('error', $this->email->print_debugger()); // Show the mail error stack.
-                    $this->session->set_flashdata('email', lang('email-error-flash'));
+                    $this->session->set_flashdata('email', 'Wij konden de email niet verzenden');
                 }
 
                 $this->email->clear(); // Clear the email batch in the sys.
@@ -97,12 +99,12 @@ class Signature extends CI_Controller
 
             redirect($_SERVER['HTTP_REFERER']);
         } else { // Form validation fails.
-            // var_dump(validation_errors());  // For debugging propose.
-            // die();                          // For debugging propose.
+            var_dump(validation_errors());  // For debugging propose.
+            die();                          // For debugging propose.
 
             $this->session->set_flashdata('class', 'alert alert-danger');
-            $this->session->set_flashdata('email', lang('insert-email-validation-insert'));
-            $this->session->set_flashdata('database', lang('insert-validation-insert'));
+            $this->session->set_flashdata('email', 'validatie');
+            $this->session->set_flashdata('database', 'validatie');
 
             redirect($_SERVER['HTTP_REFERER']);
         }

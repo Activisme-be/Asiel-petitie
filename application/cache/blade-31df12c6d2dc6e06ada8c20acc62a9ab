@@ -1,15 +1,18 @@
-a:3:{s:4:"time";i:1481302386;s:3:"ttl";i:3600;s:4:"data";s:2818:"<?php echo  defined('BASEPATH') OR exit('No direct script access allowed'); ; ?>
+a:3:{s:4:"time";i:1481319289;s:3:"ttl";i:3600;s:4:"data";s:3039:"<?php echo  defined('BASEPATH') OR exit('No direct script access allowed'); ; ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title> <?php echo  $this->config->item('app_name') ; ?> | <?php echo  $title ; ?> </title>
+        <title> <?php echo  lang('header') ; ?> <?php echo  $this->config->item('app_name') ; ?> | <?php echo  $title ; ?> </title>
 
         <?php //  META tags  ?>        <meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="<?php echo  $this->config->item('app_description') ; ?>">
 		<meta name="author" content="<?php echo  $this->config->item('app_author') ; ?>">
+        <meta property="og:description" content="<?php echo  $this->config->item('app_description') ; ?>" />
+
+        <script src="https://use.fontawesome.com/d7fb2280f1.js"></script>
 
         <?php //  Stylesheets  ?>        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Allan:700">
@@ -31,10 +34,12 @@ a:3:{s:4:"time";i:1481302386;s:3:"ttl";i:3600;s:4:"data";s:2818:"<?php echo  def
         <?php echo $this->_include('layouts/partials/navbar'); ?>
         <div class="container">
 
-            <?php //  Flash session  ?>            <?php if (isset($_SESSION['class']) && isset($_SESSION['database']) && isset($_SESSION['email'])): ?>
+            <?php //  Flash session  ?>            <?php if (isset($_SESSION['class'])): ?>
                 <div class="row">
                     <div class="col-sm-12">
-                        Wij hebben u invàoer verwerkt. En Minister Franken gemaild.
+                        <div class="alert alert-success">
+                            <?php echo  lang('feedback') ; ?>
+                        </div>
                     </div>
                 </div>
             <?php endif; ?>

@@ -30,10 +30,12 @@ class Welcome extends CI_Controller
     {
         parent::__construct();
         $this->load->library(['form_validation', 'blade', 'session']);
-        $this->load->helper(['url']);
+        $this->load->helper(['url', 'language']);
 
         $this->User     = $this->session->userdata('logged_in');
         $this->Language = $this->session->userdata('language');
+
+        $this->lang->load(['footer', 'petitie', 'navbar', 'counter', 'signature', 'keys'], $this->Language['language_key']);
     }
 
     /**

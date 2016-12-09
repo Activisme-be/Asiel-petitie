@@ -1,6 +1,6 @@
-a:3:{s:4:"time";i:1481300227;s:3:"ttl";i:3600;s:4:"data";s:181:"<div class="row">
+a:3:{s:4:"time";i:1481316383;s:3:"ttl";i:3600;s:4:"data";s:191:"<div class="row">
     <div class="col-sm-12">
-        <img src="<?php echo  $this->config->item('image_front') ; ?>" class="frontpage-image" alt="Alternate Text">
+        <img src="<?php echo  base_url($this->config->item('image_front')) ; ?>" class="frontpage-image" alt="Alternate Text">
     </div>
 </div>
 ";}

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title> {{ $this->config->item('app_name') }} | {{ $title }} </title>
+        <title> {{ lang('header') }} {{ $this->config->item('app_name') }} | {{ $title }} </title>
 
         {{-- META tags --}}
         <meta charset="utf-8">
@@ -11,6 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="{{ $this->config->item('app_description') }}">
 		<meta name="author" content="{{ $this->config->item('app_author') }}">
+        <meta property="og:description" content="{{ $this->config->item('app_description') }}" />
+
+        <script src="https://use.fontawesome.com/d7fb2280f1.js"></script>
 
         {{-- Stylesheets --}}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -36,10 +39,12 @@
         <div class="container">
 
             {{-- Flash session --}}
-            @if (isset($_SESSION['class']) && isset($_SESSION['database']) && isset($_SESSION['email']))
+            @if (isset($_SESSION['class']))
                 <div class="row">
                     <div class="col-sm-12">
-                        Wij hebben u invoer verwerkt. En Minister Franken gemaild.
+                        <div class="alert alert-success">
+                            {{ lang('feedback') }}
+                        </div>
                     </div>
                 </div>
             @endif

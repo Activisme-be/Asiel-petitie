@@ -17,12 +17,12 @@
  *
  */
 
-$config['app_name']         = 'Stop Theo Francken!';
-$config['app_description']  = '';
+$config['app_name']         = 'Theo Francken!';
+$config['app_description']  = 'Naar aanleiding van de uitspraken die Theo Franken de laatste dagen deed, ook het weigeren van de wet te volgen vinden wij het nodig om te reageren en hebben wij een mail systeem gemaakt om hem daar op te wijzen! alvast bedankt om ook deel te nemen namens activisme.be!';
 $config['app_author']       = 'Tom Manheaghe - Activisme.be';
 
-$config['image_front']      = 'http://static0.hln.be/static/photo/2016/0/4/5/20160126173037/media_xll_8350880.jpg';
+$config['image_front']      = 'assets/img/front.jpg';
 $config['image_background'] = 'http://slidesjs.com/examples/standard/img/example-slide-1.jpg';
 
 $config['email_header']     = 'Eis je recht als burger, tegen Francken.';
-$config['email_deliver']    = ['oliver.nimet@gmail.com', 'topairy@gmail.com', 'tom@activisme.be'];
+$config['email_deliver']    = ['kab.francken@ibz.fgov.be', 'theo.francken@n-va.be'];

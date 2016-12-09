@@ -8,47 +8,35 @@
                     {{-- --}}
                         <div class="col-sm-12">
                             <span class="pull-right">
-                                <strong>{{ $count }}</strong> Email's verzonden
+                                <strong>{{ $count }}</strong> {{ lang('email') }}
                             </span>
                         </div>
                     {{-- --}}
 
                     <div class="col-md-9">
 
-                        <h3>Meneer de Staatssecretaris, Excellentie.</h3>
+                        <h3>{{ lang('petition_title') }}</h3>
 
-                        <p>
-                            Bij het aanvaarden van Uw ambt hebt U een eed gezworen.
-                            Daarin zweert U de Grondwet te respecteren.
-                            Door die eed ontving U de parlementaire onschendbaarheid waarvan U geniet, en hebt U het recht verworven om Uw ambt uit te oefenen.
-                            Die uitoefening van Uw ambt is echter voorwaardelijk. Ze is bepaald door de eed die U hebt afgelegd.
-                        </p>
+                        <p>{{ lang('align_1') }}</p>
 
-                        <p>
-                            Uw recente uitspraken over de rechterlijke macht in dit land:
-                        </p>
+                        <p>{{ lang('align_2') }}</p>
 
                         <blockquote>
-                            Hoe rechters de trias politica schenden door Uw beleid te vernietigen en U te dwingen de wet te volgen
-                            is op zichzelf zowat de grofste schending van de trias politica die men zich kan inbeelden.
+                            {{ lang('align_3') }}
                         </blockquote>
 
-                        <p>
-                            Het is vanzelfsprekend daardoor een overtreding van Uw eed, wat de scheiding der machten is één van de pijlers van onze democratische Grondwet.
-                        </p>
+                        <p>{{ lang('align_4') }}</p>
+
+                        <p>{{ lang('align_5') }}</p>
+
+                        <p>{{ lang('align_6') }}</p>
+
+                        @if($this->Language['language_key'] === 'french')
+                            <p>{{ lang('align_7') }}</p>
+                        @endif
 
                         <p>
-                            Als onafhankelijke burgers van dit land aanvaarden wij dat niet. En wij verordenen U,
-                            uit hoofde van Uw ambtseed, de wet na te leven, zoals deze U door een onafhankelijke rechtbank is opgelegd.
-                        </p>
-
-                        <p>
-                            Het zou U ook sieren indien U zich voor deze volstrekt antidemocratische uithaal naar de onafhankelijkheid van de rechterlijke macht publiek zou verontschuldigen.
-                            Dat laatste laten we aan Uw eigen goede manieren over.
-                        </p>
-
-                        <p>
-                            Hoogachtend, <strong>[uw naam]</strong> wonend te <strong>[Uw stad]</strong>
+                            {{ lang('align_8') }} <strong>[{{ lang('petition_name') }}]</strong> {{ lang('meh') }} <strong>[{{ lang('petition_email') }}]</strong>
                         </p>
 
                         <hr>
@@ -57,36 +45,36 @@
                         <form id="signature" method="post" class="form-horizontal" action="{{ base_url('signature/insert') }}">
                             <div class="form-group">
                                 <label class="control-label col-sm-2">
-                                    Uw naam: <span class="text-danger">*</span>
+                                    {{ lang('label-name') }}: <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-sm-4">
-                                    <input type="text" v-model="signature.name" class="form-control" name="name" placeholder="Naam">
+                                    <input type="text" v-model="signature.name" class="form-control" name="name" placeholder="{{ lang('placeholder-name') }}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-sm-2">
-                                    Uw Email: <span class="text-danger">*</span>
+                                    {{ lang('label-email') }}: <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-sm-4">
-                                    <input type="email" v-model="signature.email" class="form-control" name="email" placeholder="Uw email">
+                                    <input type="email" v-model="signature.email" class="form-control" name="email" placeholder="{{ lang('placeholder-email') }}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-sm-2">
-                                    Wonend te: <span class="text-danger">*</span>
+                                    {{ lang('label-place') }}: <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-sm-4">
-                                    <input type="text" v-model="signature.city" class="form-control" name="city" placeholder="Wonende te">
+                                    <input type="text" v-model="signature.city" class="form-control" name="city" placeholder="{{ lang('placeholder-place') }}">
                                 </div>
                             </div>
 
                             {{-- Button's --}}
                             <div class="form-group" v-if="! submitted">
                                 <div class="col-md-offset-2 col-sm-9">
-                                    <button type="submit" v-attr="disabled: errors" class="btn btn-sm btn-success">Tekenen</button>
-                                    <button type="reset" class="btn btn-sm btn-danger">Formulier legen</button>
+                                    <button type="submit" v-attr="disabled: errors" class="btn btn-sm btn-success">{{ lang('button-send') }}</button>
+                                    <button type="reset" class="btn btn-sm btn-danger">{{ lang('button-reset') }}</button>
                                 </div>
                             </div>
                         </form>
