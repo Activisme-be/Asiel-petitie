@@ -69,9 +69,9 @@ class Signature extends CI_Controller
                 //start building email.
 
                 $config['protocol'] = 'smtp';
-                $config['smtp_host'] = "mailout.one.com";
-                $config['smtp_user'] = "mailing@activisme.be";
-                $config['smtp_pass'] = "ikbeneenwachtwoord";
+                $config['smtp_host'] = "";
+                $config['smtp_user'] = "";
+                $config['smtp_pass'] = "";
                 $config['smtp_port'] = "25";
                 // $config['smtp_crypto'] = 'tls';
                 $config['authencation'] = 'true';
